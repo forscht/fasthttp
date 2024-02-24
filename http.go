@@ -2190,11 +2190,8 @@ func writeBodyFixedSize(w *bufio.Writer, r io.Reader, size int64) error {
 		}
 	}
 
-	n, err := copyZeroAlloc(w, r)
-
-	if n != size && err == nil {
-		err = fmt.Errorf("copied %d bytes from body stream instead of %d bytes", n, size)
-	}
+	_, err := copyZeroAlloc(w, r)
+	
 	return err
 }
 
